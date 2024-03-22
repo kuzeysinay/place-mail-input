@@ -4,13 +4,14 @@ import axios from "axios";
 
 function App() {
   const [email, setEmail] = useState(""); 
+  const [key, setKey] = useState(""); 
 
   const submit = (event) => {
     event.preventDefault(); 
 
     axios.post(
       "https://backend.place.yildizskylab.com/api/whitelistedMails/add",
-      { mail: email } 
+      { mail: email, key: key }
     )
     .then(response => {
       console.log("Email submitted successfully:", response);
@@ -24,11 +25,19 @@ function App() {
     setEmail(event.target.value); 
   };
 
+  
+  const handleKeyChange = (event) => {
+    if (!key) { 
+      setKey(event.target.value); 
+    }
+  };
+
   return (
     <div className='App'>
       <form onSubmit={submit}>
         <input className='Input' type='email' placeholder='E-Posta' value={email} onChange={handleEmailChange}></input>
-        <button type='submit'>Button</button>
+        <input className='Input' type='password' placeholder='Parola' value={key} onChange={handleKeyChange}></input>
+        <button className="Button" type='submit'>Button</button>
       </form>
     </div>
   );
