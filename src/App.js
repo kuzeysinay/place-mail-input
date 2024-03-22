@@ -27,9 +27,9 @@ function App() {
 
   
   const handleKeyChange = (event) => {
-    if (!key) { 
+    
       setKey(event.target.value); 
-    }
+    
   };
 
   return (
