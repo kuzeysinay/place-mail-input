@@ -15,6 +15,8 @@ function App() {
     )
     .then(response => {
       console.log("Email submitted successfully:", response);
+      // Clear the email input after successful submission
+      setEmail("");
     })
     .catch(error => {
       console.error("Error submitting email:", error);
@@ -25,11 +27,8 @@ function App() {
     setEmail(event.target.value); 
   };
 
-  
   const handleKeyChange = (event) => {
-    
-      setKey(event.target.value); 
-    
+    setKey(event.target.value); 
   };
 
   return (
