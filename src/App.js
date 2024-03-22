@@ -1,23 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react"; 
+import "./App.css";
+import axios from "axios";
 
 function App() {
+  const [email, setEmail] = useState(""); 
+
+  const submit = (event) => {
+    event.preventDefault(); 
+
+    axios.post(
+      "https://backend.place.yildizskylab.com/api/whitelistedMails/add",
+      { mail: email } 
+    )
+    .then(response => {
+      console.log("Email submitted successfully:", response);
+    })
+    .catch(error => {
+      console.error("Error submitting email:", error);
+    });
+  };
+
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value); 
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <form onSubmit={submit}>
+        <input className='Input' type='email' placeholder='E-Posta' value={email} onChange={handleEmailChange}></input>
+        <button type='submit'>Button</button>
+      </form>
     </div>
   );
 }
